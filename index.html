@@ -16,9 +16,21 @@
       line-height: 1.6; 
       color: #fff;
       overflow-x: hidden;
-      background: linear-gradient(-45deg, #7f00ff, #ff007c, #00c3ff);
+      background: linear-gradient(-45deg, #1a0033, #2d0052, #1a0033, #0f004d);
       background-size: 400% 400%;
-      animation: gradient 12s ease infinite;
+      animation: gradient 15s ease infinite;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 204, 0, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -100px;
+      left: -100px;
+      pointer-events: none;
     }
     @keyframes gradient {
       0% { background-position: 0% 50%; }
@@ -26,11 +38,49 @@
       100% { background-position: 0% 50%; }
     }
 
-    header { background: rgba(0,0,0,0.6); padding: 15px 30px; position: sticky; top: 0; backdrop-filter: blur(5px); z-index: 100; }
+    header { 
+      background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(30, 0, 60, 0.8) 100%);
+      padding: 20px 40px; 
+      position: sticky; 
+      top: 0; 
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 2px solid rgba(255, 204, 0, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
     nav { display: flex; justify-content: space-between; align-items: center; }
-    nav h1 { font-family: 'Jura', sans-serif; font-size: 1.8rem; color: #ffcc00; }
-    nav a { margin-left: 20px; text-decoration: none; color: #eee; font-weight: bold; font-family: 'Jura', sans-serif; transition: 0.3s; }
+    nav h1 { 
+      font-family: 'Jura', sans-serif; 
+      font-size: 2rem; 
+      background: linear-gradient(135deg, #ffcc00, #ff007c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    nav a { 
+      margin-left: 30px; 
+      text-decoration: none; 
+      color: #ddd; 
+      font-weight: 600; 
+      font-family: 'Jura', sans-serif; 
+      transition: 0.4s;
+      position: relative;
+      font-size: 0.95rem;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ffcc00, #ff007c);
+      transition: width 0.4s;
+    }
     nav a:hover { color: #ffcc00; }
+    nav a:hover::after { width: 100%; }
 
     .menu-toggle {
       display: none;
@@ -42,64 +92,278 @@
       display: flex;
     }
 
-    .hero { text-align: center; padding: 80px 20px; }
+    .hero { 
+      text-align: center; 
+      padding: 100px 20px 80px;
+      position: relative;
+      z-index: 1;
+    }
     .hero img { 
-      width: 200px; height: 200px; border-radius: 50%; 
-      border: 4px solid #ffcc00; margin-bottom: 20px; object-fit: cover;
-      box-shadow: 0 0 25px #ffcc00, 0 0 50px #ff007c, 0 0 80px #00c3ff;
-      animation: glow 3s ease-in-out infinite alternate;
+      width: 220px; 
+      height: 220px; 
+      border-radius: 50%; 
+      border: 5px solid transparent;
+      background: linear-gradient(135deg, #ffcc00, #ff007c, #00c3ff);
+      background-clip: border-box;
+      margin-bottom: 30px; 
+      object-fit: cover;
+      box-shadow: 0 0 40px #ffcc00, 0 0 60px #ff007c, 0 0 80px rgba(0, 195, 255, 0.5);
+      animation: float 6s ease-in-out infinite, glow 3s ease-in-out infinite alternate;
+      transition: transform 0.3s;
+    }
+    .hero img:hover { transform: scale(1.05); }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
     @keyframes glow {
-      from { box-shadow: 0 0 25px #ffcc00, 0 0 50px #ff007c, 0 0 80px #00c3ff; }
-      to { box-shadow: 0 0 40px #ffcc00, 0 0 80px #ff007c, 0 0 120px #00c3ff; }
+      from { box-shadow: 0 0 30px #ffcc00, 0 0 50px #ff007c, 0 0 70px rgba(0, 195, 255, 0.5); }
+      to { box-shadow: 0 0 50px #ffcc00, 0 0 80px #ff007c, 0 0 120px rgba(0, 195, 255, 0.8); }
     }
 
-    .hero h2 { font-size: 2.8rem; margin-bottom: 15px; color: #ffcc00; text-shadow: 0 0 15px #ffcc00; font-family: 'Jura', sans-serif; }
-    .hero p { max-width: 600px; margin: 0 auto 20px; font-size: 1.2rem; color: #fff; }
-    .btn { background: #ffcc00; color: black; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; font-family: 'Jura', sans-serif; }
-    .btn:hover { background: #ff007c; color: white; box-shadow: 0 0 20px #ffcc00; }
+    .hero h2 { 
+      font-size: 3.2rem; 
+      margin-bottom: 15px; 
+      background: linear-gradient(135deg, #ffcc00, #ff007c, #00c3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      font-family: 'Jura', sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .hero p { 
+      max-width: 700px; 
+      margin: 0 auto 30px; 
+      font-size: 1.3rem; 
+      color: #ccc;
+      font-weight: 500;
+    }
+    .btn { 
+      background: linear-gradient(135deg, #ffcc00, #ff007c);
+      color: white; 
+      padding: 15px 35px; 
+      border-radius: 30px; 
+      text-decoration: none; 
+      font-weight: 700; 
+      transition: 0.4s; 
+      display: inline-block; 
+      font-family: 'Jura', sans-serif;
+      border: 2px solid transparent;
+      box-shadow: 0 8px 20px rgba(255, 204, 0, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.95rem;
+    }
+    .btn:hover { 
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(255, 204, 0, 0.5);
+    }
 
-    section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-    h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; color: #ffcc00; font-family: 'Jura', sans-serif; text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff007c; }
+    section { 
+      padding: 80px 20px; 
+      max-width: 1100px; 
+      margin: auto;
+      position: relative;
+      z-index: 1;
+    }
+    section::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ffcc00, transparent);
+    }
+    h2 { 
+      text-align: center; 
+      margin-bottom: 50px; 
+      font-size: 2.5rem; 
+      font-family: 'Jura', sans-serif;
+      background: linear-gradient(135deg, #ffcc00, #ff007c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: none;
+    }
 
     .card { 
-      padding: 20px; 
-      border-radius: 12px; 
-      margin: 15px 0; 
+      padding: 30px; 
+      border-radius: 15px; 
+      margin: 20px 0; 
       color: #f5f5f5;
-      background: #111;  
-      box-shadow: 0 0 15px rgba(0,0,0,0.6); 
+      background: rgba(20, 0, 40, 0.6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       border: 2px solid transparent;
       font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.6s;
+    }
+    .card:hover::before { left: 100%; }
+    .card:hover { transform: translateY(-5px); }
+
+    #about .card { 
+      border-color: #ffcc00; 
+      box-shadow: 0 8px 32px rgba(255, 204, 0, 0.2), inset 0 0 20px rgba(255, 204, 0, 0.05);
+    }
+    #about .card:hover { box-shadow: 0 15px 50px rgba(255, 204, 0, 0.4), inset 0 0 20px rgba(255, 204, 0, 0.1); }
+    #education .card { 
+      border-color: #7f00ff; 
+      box-shadow: 0 8px 32px rgba(127, 0, 255, 0.2), inset 0 0 20px rgba(127, 0, 255, 0.05);
+    }
+    #education .card:hover { box-shadow: 0 15px 50px rgba(127, 0, 255, 0.4), inset 0 0 20px rgba(127, 0, 255, 0.1); }
+    #experience .card { 
+      border-color: #00c3ff; 
+      box-shadow: 0 8px 32px rgba(0, 195, 255, 0.2), inset 0 0 20px rgba(0, 195, 255, 0.05);
+    }
+    #experience .card:hover { box-shadow: 0 15px 50px rgba(0, 195, 255, 0.4), inset 0 0 20px rgba(0, 195, 255, 0.1); }
+    #skills .card { 
+      border-color: #ff007c; 
+      box-shadow: 0 8px 32px rgba(255, 0, 124, 0.2), inset 0 0 20px rgba(255, 0, 124, 0.05);
+    }
+    #skills .card:hover { box-shadow: 0 15px 50px rgba(255, 0, 124, 0.4), inset 0 0 20px rgba(255, 0, 124, 0.1); }
+    #certifications .card { 
+      border-color: #ff66ff; 
+      box-shadow: 0 8px 32px rgba(255, 102, 255, 0.2), inset 0 0 20px rgba(255, 102, 255, 0.05);
+    }
+    #certifications .card:hover { box-shadow: 0 15px 50px rgba(255, 102, 255, 0.4), inset 0 0 20px rgba(255, 102, 255, 0.1); }
+    #projects .card { 
+      border-color: #00ffcc; 
+      box-shadow: 0 8px 32px rgba(0, 255, 204, 0.2), inset 0 0 20px rgba(0, 255, 204, 0.05);
+    }
+    #projects .card:hover { box-shadow: 0 15px 50px rgba(0, 255, 204, 0.4), inset 0 0 20px rgba(0, 255, 204, 0.1); }
+    #hobbies .card { 
+      border-color: #ffaa00; 
+      box-shadow: 0 8px 32px rgba(255, 170, 0, 0.2), inset 0 0 20px rgba(255, 170, 0, 0.05);
+    }
+    #hobbies .card:hover { box-shadow: 0 15px 50px rgba(255, 170, 0, 0.4), inset 0 0 20px rgba(255, 170, 0, 0.1); }
+    #contact .card { 
+      border-color: #00ffff; 
+      box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.05);
+    }
+    #contact .card:hover { box-shadow: 0 15px 50px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.1); }
+
+    .card p, .card ul { line-height: 1.8; font-size: 1.05rem; }
+    .card li { margin-left: 20px; margin-bottom: 10px; }
+    .card b { color: #ffcc00; font-weight: 700; }
+
+    .chips { 
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 12px;
+    }
+    .chip { 
+      background: linear-gradient(135deg, rgba(255, 204, 0, 0.15), rgba(255, 0, 124, 0.15));
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      color: #ffcc00; 
+      padding: 10px 18px; 
+      border-radius: 25px; 
+      font-size: 1rem; 
+      font-family: 'Jura', sans-serif;
+      box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
+      transition: all 0.3s;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+    }
+    .chip:nth-child(odd) { 
+      background: linear-gradient(135deg, rgba(127, 0, 255, 0.15), rgba(0, 195, 255, 0.15));
+      color: #00c3ff;
+      border: 2px solid rgba(0, 195, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 195, 255, 0.2);
+    }
+    .chip:nth-child(even) { 
+      background: linear-gradient(135deg, rgba(255, 0, 124, 0.15), rgba(255, 102, 255, 0.15));
+      color: #ff007c;
+      border: 2px solid rgba(255, 0, 124, 0.3);
+      box-shadow: 0 4px 15px rgba(255, 0, 124, 0.2);
+    }
+    .chip:hover { 
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px currentColor;
     }
 
-    #about .card { border-color: #ffcc00; box-shadow: 0 0 15px #ffcc00; }
-    #education .card { border-color: #7f00ff; box-shadow: 0 0 15px #7f00ff; }
-    #experience .card { border-color: #00c3ff; box-shadow: 0 0 15px #00c3ff; }
-    #skills .card { border-color: #ff007c; box-shadow: 0 0 15px #ff007c; }
-    #certifications .card { border-color: #ff66ff; box-shadow: 0 0 15px #ff66ff; }
-    #projects .card { border-color: #00ffcc; box-shadow: 0 0 15px #00ffcc; }
-    #hobbies .card { border-color: #ffaa00; box-shadow: 0 0 15px #ffaa00; }
-    #contact .card { border-color: #ffffff; box-shadow: 0 0 15px #ffffff; }
+    .socials { margin-top: 20px; }
+    .socials a { 
+      margin: 0 15px; 
+      color: #00ffff; 
+      text-decoration: none; 
+      font-weight: 700; 
+      font-family: 'Jura', sans-serif;
+      transition: 0.3s;
+      position: relative;
+      display: inline-block;
+    }
+    .socials a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00ffff;
+      transition: width 0.3s;
+    }
+    .socials a:hover { color: #ffcc00; }
+    .socials a:hover::after { width: 100%; }
 
-    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-    .chip { background: rgba(255, 204, 0, 0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 15px; border-radius: 20px; font-size: 1rem; font-family: 'Inter', sans-serif; box-shadow: 0 0 10px rgba(255, 204, 0, 0.6); }
-
-    .socials a { margin: 0 10px; color: #ffcc00; text-decoration: none; font-weight: bold; font-family: 'Jura', sans-serif; }
-    .socials a:hover { text-decoration: underline; }
-
-    footer { background: rgba(0,0,0,0.6); color: #ccc; text-align: center; padding: 20px; margin-top: 40px; font-family: 'Inter', sans-serif; }
+    footer { 
+      background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(30, 0, 60, 0.8) 100%);
+      color: #999; 
+      text-align: center; 
+      padding: 40px 20px; 
+      margin-top: 60px; 
+      font-family: 'Inter', sans-serif;
+      border-top: 2px solid rgba(255, 204, 0, 0.3);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
 
     @media (max-width: 768px) {
+      header { padding: 15px 20px; }
+      nav h1 { font-size: 1.5rem; }
       .menu-toggle { display: block; }
       .nav-links { 
-        display: none; flex-direction: column;
-        background: rgba(0,0,0,0.8);
-        position: absolute; top: 60px; right: 20px;
-        padding: 15px; border-radius: 8px;
+        display: none; 
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.95);
+        position: absolute; 
+        top: 60px; 
+        right: 20px;
+        padding: 20px; 
+        border-radius: 12px;
+        border: 2px solid rgba(255, 204, 0, 0.3);
+        min-width: 200px;
       }
-      .nav-links a { margin: 10px 0; display: block; }
+      .nav-links a { 
+        margin: 12px 0; 
+        display: block;
+      }
       .nav-links.active { display: flex; }
+      .hero { padding: 60px 20px 50px; }
+      .hero h2 { font-size: 2.2rem; }
+      .hero p { font-size: 1.1rem; }
+      section { padding: 60px 20px; }
+      h2 { font-size: 1.8rem; margin-bottom: 30px; }
+      .card { padding: 20px; }
     }
   </style>
 </head>
@@ -159,6 +423,7 @@
     <h2>Experience</h2>
     <div class="card">
       <ul>
+        <li>Worked as <b>Product Developer</b> at <b>DIAN Technologies</b></li>
         <li>Worked in <b>ExploitX – Into the Void</b></li>
         <li>Participated in <b>Revil 2024</b></li>
       </ul>
@@ -244,6 +509,7 @@
       const menuToggle = document.querySelector(".menu-toggle");
       const navLinks = document.querySelector(".nav-links");
       const links = document.querySelectorAll(".nav-links a");
+      const chips = document.querySelectorAll(".chip");
 
       // Toggle menu on ☰ click
       menuToggle.addEventListener("click", () => {
@@ -265,7 +531,60 @@
           navLinks.classList.remove("active");
         });
       });
+
+      // Add click animation to chips
+      chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          chip.style.transform = "scale(1.1)";
+          setTimeout(() => {
+            chip.style.transform = "scale(1)";
+          }, 200);
+        });
+      });
+
+      // Scroll animation for sections
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px"
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.animation = "slideIn 0.6s ease-out";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll("section").forEach(section => {
+        section.style.opacity = "0";
+        observer.observe(section);
+      });
+
+      // Cursor effect for interactive elements
+      document.querySelectorAll(".card, .btn, nav a, .chip").forEach(el => {
+        el.addEventListener("mouseenter", (e) => {
+          el.style.cursor = "pointer";
+        });
+      });
     });
+
+    // Add CSS animation for slide-in
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
